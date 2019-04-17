@@ -1,0 +1,29 @@
+{
+  "name": "RNAntViewer",
+  "version": "1.0.1",
+  "summary": "RNAntViewer",
+  "description": "RNAntViewer bla bla",
+  "homepage": "https://github.com/kolyan94/RNAntViewer",
+  "license": "MIT",
+  "authors": {
+    "author": "author@domain.cn"
+  },
+  "platforms": {
+    "ios": "11.3"
+  },
+  "source": {
+    "git": "https://github.com/kolyan94/RNAntViewer.git",
+    "tag": "1.0.1"
+  },
+  "source_files": "ios/**/*.{h,m}",
+  "requires_arc": true,
+  "static_framework": true,
+  "dependencies": {
+    "React": [
+
+    ],
+    "AntViewer_ios": [
+
+    ]
+  }
+}

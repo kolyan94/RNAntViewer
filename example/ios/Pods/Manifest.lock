@@ -1,0 +1,188 @@
+PODS:
+  - AntViewer_ios (0.1.1):
+    - Firebase/Core
+    - Firebase/Database
+    - IQKeyboardManagerSwift
+    - Kingfisher
+    - lottie-ios
+  - boost-for-react-native (1.63.0)
+  - DoubleConversion (1.1.6)
+  - Firebase/Core (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.8.1)
+  - Firebase/CoreOnly (5.20.2):
+    - FirebaseCore (= 5.4.1)
+  - Firebase/Database (5.20.2):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (= 5.1.1)
+  - FirebaseAnalytics (5.8.1):
+    - FirebaseCore (~> 5.4)
+    - FirebaseInstanceID (~> 3.8)
+    - GoogleAppMeasurement (= 5.8.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.4.1):
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseDatabase (5.1.1):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (3.8.1):
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/UserDefaults (~> 5.2)
+  - Folly (2016.10.31.00):
+    - boost-for-react-native
+    - DoubleConversion
+    - glog
+  - glog (0.3.5)
+  - GoogleAppMeasurement (5.8.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.7.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.7.0)
+  - GoogleUtilities/Logger (5.7.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.7.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.7.0)"
+  - GoogleUtilities/Reachability (5.7.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.7.0):
+    - GoogleUtilities/Logger
+  - IQKeyboardManagerSwift (6.2.1)
+  - Kingfisher (5.3.1)
+  - leveldb-library (1.20)
+  - lottie-ios (3.0.4)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - React (0.57.7):
+    - React/Core (= 0.57.7)
+  - React/Core (0.57.7):
+    - yoga (= 0.57.7.React)
+  - React/CxxBridge (0.57.7):
+    - Folly (= 2016.10.31.00)
+    - React/Core
+    - React/cxxreact
+  - React/cxxreact (0.57.7):
+    - boost-for-react-native (= 1.63.0)
+    - Folly (= 2016.10.31.00)
+    - React/jschelpers
+    - React/jsinspector
+  - React/DevSupport (0.57.7):
+    - React/Core
+    - React/RCTWebSocket
+  - React/fishhook (0.57.7)
+  - React/jschelpers (0.57.7):
+    - Folly (= 2016.10.31.00)
+    - React/PrivateDatabase
+  - React/jsinspector (0.57.7)
+  - React/PrivateDatabase (0.57.7)
+  - React/RCTAnimation (0.57.7):
+    - React/Core
+  - React/RCTBlob (0.57.7):
+    - React/Core
+  - React/RCTNetwork (0.57.7):
+    - React/Core
+  - React/RCTText (0.57.7):
+    - React/Core
+  - React/RCTWebSocket (0.57.7):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - RNAntViewer (1.0.1):
+    - AntViewer_ios
+    - React
+  - yoga (0.57.7.React)
+
+DEPENDENCIES:
+  - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
+  - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/CxxBridge (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNAntViewer (from `../node_modules/react-native-ant-viewer`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - boost-for-react-native
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - GoogleAppMeasurement
+    - GoogleUtilities
+    - IQKeyboardManagerSwift
+    - Kingfisher
+    - leveldb-library
+    - lottie-ios
+    - nanopb
+  https://github.com/kolyan94/AntViewer_ios_specs.git:
+    - AntViewer_ios
+
+EXTERNAL SOURCES:
+  DoubleConversion:
+    :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  Folly:
+    :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
+  glog:
+    :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  React:
+    :path: "../node_modules/react-native"
+  RNAntViewer:
+    :path: "../node_modules/react-native-ant-viewer"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
+SPEC CHECKSUMS:
+  AntViewer_ios: 30a97bedf966b6b7ac6f694f5238962d06a2eb1f
+  boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
+  Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
+  FirebaseAnalytics: ece1aa57a4f43c64d53a648b5a5e05151aae947b
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
+  FirebaseDatabase: 2c15b0ea6f2c6eb5e57413f9d6340f1e50b81ae3
+  FirebaseInstanceID: a122b0c258720cf250551bb2bedf48c699f80d90
+  Folly: c89ac2d5c6ab169cd7397ef27485c44f35f742c7
+  glog: e8acf0ebbf99759d3ff18c86c292a5898282dcde
+  GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
+  GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
+  IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
+  Kingfisher: d9e7e0b209b59b8f9873aa2f37654e81a7beea51
+  leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  React: 67899bbb285ceb9b4ee1c88b3991602ba5772ad2
+  RNAntViewer: e3bb4cdd8f353a237c4514691a6979668436209a
+  yoga: 192d724e53380b783e09b7d687a55cd8ed5188be
+
+PODFILE CHECKSUM: 144ed405d033f53a7a50f90c897e5b2c6733a29f
+
+COCOAPODS: 1.7.0.beta.2
