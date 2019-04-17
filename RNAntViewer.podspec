@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author       = { "author" => "author@domain.cn" }
   s.platform     = :ios, "11.3"
   s.source       = { :git => "https://github.com/kolyan94/RNAntViewer.git", :tag => s.version.to_s }
-  s.source_files  = "RNAntViewer/**/*.{h,m}"
+  s.source_files  = "ios/**/*.{h,m}"
   s.requires_arc = true
 
 
