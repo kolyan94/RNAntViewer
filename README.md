@@ -3,28 +3,54 @@
 
 ## Getting started
 
-`$ npm install react-native-ant-viewer --save`
+1. add  `"react-native-ant-viewer": "https://github.com/kolyan94/RNAntViewer.git"` to package.json dependencies
+2. `$ npm install`
 
-### Mostly automatic installation
-
-`$ react-native link react-native-ant-viewer`
 
 ### Manual installation
 
-
 #### iOS
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-ant-viewer` and add `RNAntViewer.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNAntViewer.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+If you use Cocoapods: 
+1. add  `pod 'RNAntViewer', path: '../node_modules/react-native-ant-viewer'` to your Podfile
+2. `$ pod install`
+
+If not:
+
+1. `$ pod init`
+2. 
+```
+platform :ios, '11.3'
+use_frameworks!
+target 'your_app_name' do
+pod 'React', :path => '../node_modules/react-native', :subspecs => [
+'Core',
+'CxxBridge', # Include this for RN >= 0.47
+'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+'RCTText',
+'RCTNetwork',
+'RCTWebSocket', # needed for debugging
+# Add any other subspecs you want to use in your project
+]
+# Explicitly include Yoga if you are using RN >= 0.42.0
+pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+# Third party deps podspec link
+pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+pod 'RNAntViewer', path: '../node_modules/react-native-ant-viewer'
+
+end
+```
+3. `$ pod install`
 
 
 ## Usage
 ```javascript
-import RNAntViewer from 'react-native-ant-viewer';
+import AntWidget from 'react-native-ant-viewer';
 
-// TODO: What to do with the module?
-RNAntViewer;
+<AntWidget />
 ```
   
