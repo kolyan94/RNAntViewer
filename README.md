@@ -46,6 +46,9 @@ end
 ```
 3. `$ pod install`
 
+### Troubleshooting 
+https://stackoverflow.com/questions/50096025/it-gives-errors-when-using-swift-static-library-with-objective-c-project
+
 
 ## Usage
 ```javascript
