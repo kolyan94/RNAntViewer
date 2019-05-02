@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   s.static_framework = true
   s.dependency "React"
   s.dependency "AntViewer_ios"
-  s.swift_version = 4.2
+  s.swift_version = "4.2"
 end
