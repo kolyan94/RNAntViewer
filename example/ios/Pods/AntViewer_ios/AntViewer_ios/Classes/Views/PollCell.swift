@@ -8,9 +8,9 @@
 
 import UIKit
 
-class PollCell: UITableViewCell {
+public class PollCell: UITableViewCell {
   
-  @IBOutlet weak var backgroundCellView: UIView!
-  @IBOutlet weak var pollChoiceLabel: UILabel!
+  @IBOutlet public weak var backgroundCellView: UIView!
+  @IBOutlet public weak var pollChoiceLabel: UILabel!
   
 }

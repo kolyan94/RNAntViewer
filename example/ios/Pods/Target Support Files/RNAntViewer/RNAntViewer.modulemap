@@ -1,0 +1,6 @@
+framework module RNAntViewer {
+  umbrella header "RNAntViewer-umbrella.h"
+
+  export *
+  module * { export * }
+}

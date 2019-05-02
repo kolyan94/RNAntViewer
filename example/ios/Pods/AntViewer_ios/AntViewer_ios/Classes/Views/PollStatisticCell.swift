@@ -8,11 +8,11 @@
 
 import UIKit
 
-class PollStatisticCell: UITableViewCell {
+public class PollStatisticCell: UITableViewCell {
   
-  @IBOutlet weak var pollChoiceLabel: UILabel!
-  @IBOutlet weak var progresView: UIView!
-  @IBOutlet weak var progress: NSLayoutConstraint!
-  @IBOutlet weak var progressLabel: UILabel!
+  @IBOutlet public weak var pollChoiceLabel: UILabel!
+  @IBOutlet public weak var progresView: UIView!
+  @IBOutlet public weak var progress: NSLayoutConstraint!
+  @IBOutlet public weak var progressLabel: UILabel!
   
 }

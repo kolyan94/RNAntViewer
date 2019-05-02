@@ -4,15 +4,14 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewStreamCell" customModule="AntViewer_ios" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewStreamCell" customModule="AntViewer_ios"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewStreamCell" id="gTV-IL-0wX" customClass="NewStreamCell" customModule="AntViewer_ios" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewStreamCell" id="gTV-IL-0wX" customClass="NewStreamCell" customModule="AntViewer_ios">
             <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -24,6 +23,9 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tempPic" translatesAutoresizingMaskIntoConstraints="NO" id="Dge-5c-bGB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="imageFromBundle" value="tempPic"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmR-Ou-VYx" userLabel="gradientView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
@@ -106,6 +108,9 @@
                                                             <constraint firstAttribute="width" secondItem="ZuA-OY-RVb" secondAttribute="height" multiplier="1:1" id="nOs-IZ-R92"/>
                                                             <constraint firstAttribute="width" constant="12" id="znc-6g-j1I"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="imageFromBundle" value="OpenedEye"/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6,356" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEH-4E-Uyv">
                                                         <rect key="frame" x="14" y="0.0" width="32" height="12"/>
@@ -180,7 +185,7 @@
                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="gradientView" destination="kmR-Ou-VYx" id="RAs-8n-f6S"/>
+                <outlet property="gradientView" destination="kmR-Ou-VYx" id="dG4-aP-OKx"/>
                 <outlet property="imagePlaceholder" destination="Dge-5c-bGB" id="9Mo-so-4vh"/>
                 <outlet property="liveLabel" destination="ush-mA-nDe" id="4NK-ft-1Ry"/>
                 <outlet property="startTimeLabel" destination="d14-pf-ZnW" id="BYV-01-qdd"/>

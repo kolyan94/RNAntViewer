@@ -1,4 +1,4 @@
-module AntViewer_ios {
+framework module AntViewer_ios {
   umbrella header "AntViewer_ios-umbrella.h"
 
   export *

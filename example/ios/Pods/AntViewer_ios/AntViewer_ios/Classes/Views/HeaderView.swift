@@ -8,9 +8,9 @@
 
 import UIKit
 
-class HeaderView: UICollectionReusableView {
+public class HeaderView: UICollectionReusableView {
   
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var separatoView: UIView!
+  @IBOutlet public weak var titleLabel: UILabel!
+  @IBOutlet public weak var separatoView: UIView!
   
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewStreamCell: UICollectionViewCell {
+public class NewStreamCell: UICollectionViewCell {
   
   var gradientLayer: CAGradientLayer = {
     let gradient = CAGradientLayer()
@@ -17,14 +17,14 @@ class NewStreamCell: UICollectionViewCell {
     return gradient
   }()
   
-  @IBOutlet weak var liveLabel: UILabel!
-  @IBOutlet weak var startTimeLabel: UILabel!
-  @IBOutlet weak var streamDurationLabel: UILabel!
-  @IBOutlet weak var viewersCountLabel: UILabel!
-  @IBOutlet weak var imagePlaceholder: UIImageView!
-  @IBOutlet weak var streamNameLabel: UILabel!
-  @IBOutlet weak var startTimeView: UIView!
-  @IBOutlet weak var streamDurationView: UIView!
+  @IBOutlet public weak var liveLabel: UILabel!
+  @IBOutlet public weak var startTimeLabel: UILabel!
+  @IBOutlet public weak var streamDurationLabel: UILabel!
+  @IBOutlet public weak var viewersCountLabel: UILabel!
+  @IBOutlet public weak var imagePlaceholder: UIImageView!
+  @IBOutlet public weak var streamNameLabel: UILabel!
+  @IBOutlet public weak var startTimeView: UIView!
+  @IBOutlet public weak var streamDurationView: UIView!
   @IBOutlet weak var gradientView: UIView! {
     didSet {
       gradientView.layer.addSublayer(gradientLayer)
@@ -32,7 +32,7 @@ class NewStreamCell: UICollectionViewCell {
     }
   }
   
-  override func layoutSubviews() {
+  override public func layoutSubviews() {
     super.layoutSubviews()
     //FIXME: Gradient updates with delay
     gradientLayer.frame = gradientView.bounds

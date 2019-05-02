@@ -8,13 +8,13 @@
 
 import UIKit
 
-class EmptyView: UIView {
+public class EmptyView: UIView {
   
   let kCONTENT_XIB_NAME = "EmptyView"
   
   @IBOutlet var contentView: UIView!
   
-  override init(frame: CGRect) {
+  override public init(frame: CGRect) {
     super.init(frame: frame)
     commonInit()
   }

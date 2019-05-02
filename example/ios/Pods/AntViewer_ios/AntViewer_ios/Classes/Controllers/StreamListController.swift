@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import Kingfisher
+import AntViewerExt
 
 private let reuseIdentifier = "NewStreamCell"
 
@@ -37,7 +38,7 @@ class StreamListController: UICollectionViewController {
     navigationController?.navigationBar.updateBackgroundColor()
     let closeButton = UIButton(type: .custom)
     closeButton.tintColor = .white
-    closeButton.setImage(UIImage(named: "cross", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+    closeButton.setImage(UIImage.image("cross"), for: .normal)
     
     closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
     closeButton.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
@@ -69,25 +70,7 @@ class StreamListController: UICollectionViewController {
   
   @objc
   private func changeHost(_ sender: UIButton) {
-    
-    let host = UserDefaults.standard.string(forKey: "host") ?? "https://staging-myra.com/api/v1/channels/live"
-    let alert = UIAlertController(title: "Enabled host: ", message: "\(host)", preferredStyle: .actionSheet)
-    let stagingAction = UIAlertAction(title: "Staging", style: .default) { (action) in
-      UserDefaults.standard.set("https://staging-myra.com/api/v1/channels/live", forKey: "host")
-    }
-    
-    let devAction = UIAlertAction(title: "Dev", style: .default) { (action) in
-      UserDefaults.standard.set("https://api-myra.net/api/v1/channels/live", forKey: "host")
-    }
-    
-    let prodAction = UIAlertAction(title: "Prod", style: .default) { (action) in
-      UserDefaults.standard.set("http://antourage.com/api/v1/channels/live", forKey: "host")
-    }
-    alert.addAction(stagingAction)
-    alert.addAction(devAction)
-    alert.addAction(prodAction)
-    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-    present(alert, animated: true, completion: nil)
+    presentChangeHostAlert()
   }
   
   @objc
@@ -98,15 +81,15 @@ class StreamListController: UICollectionViewController {
   fileprivate func configureCell(_ cell: NewStreamCell, forIndexPath indexPath: IndexPath) -> NewStreamCell {
     let item = getItemForIndexPath(indexPath)
     cell.streamNameLabel.text = item.title
-    cell.streamDurationView.isHidden = item is Stream
+    cell.streamDurationView.isHidden = item is AntViewerExt.Stream
     cell.liveLabel.isHidden = item is Video
     cell.startTimeLabel.text = item.date.timeAgo()
     if let item = item as? Video {
-      cell.imagePlaceholder.image = UIImage(named: "\(item.id)", in: Bundle(for: type(of: self)), compatibleWith: nil)
+      cell.imagePlaceholder.image = UIImage.image("\(item.id)")
       cell.viewersCountLabel.text = "\(item.viewersCount) views"
       cell.streamDurationLabel.text = item.duration.durationString
     } else {
-      cell.imagePlaceholder.kf.setImage(with: URL(string: item.thumbnailUrl)!, placeholder: UIImage(named: "tempPic", in: Bundle(for: type(of: self)), compatibleWith: nil))
+      cell.imagePlaceholder.kf.setImage(with: URL(string: item.thumbnailUrl)!, placeholder: UIImage.image("tempPic"))
       cell.viewersCountLabel.text = "\(item.viewersCount) Viewers"
     }
     cell.layoutSubviews()
@@ -122,19 +105,6 @@ class StreamListController: UICollectionViewController {
   }
 }
 
-extension UIImageView {
-  func load(url: URL) {
-    DispatchQueue.global().async { [weak self] in
-      if let data = try? Data(contentsOf: url) {
-        if let image = UIImage(data: data) {
-          DispatchQueue.main.async {
-            self?.image = image
-          }
-        }
-      }
-    }
-  }
-}
 
 // MARK: UICollectionViewDataSource
 extension StreamListController {

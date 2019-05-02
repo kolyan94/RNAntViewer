@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol MessageSupportable {
+public protocol MessageSupportable {
   var avatarImageView: UIImageView! { get set }
   var nameLabel: UILabel! { get set }
   var messageLabel: UILabel! { get set }
 }
 
-class PortraitMessageCell: UITableViewCell, MessageSupportable {
+public class PortraitMessageCell: UITableViewCell, MessageSupportable {
   
-  @IBOutlet weak var avatarImageView: UIImageView!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var messageLabel: UILabel!
+  @IBOutlet public weak var avatarImageView: UIImageView!
+  @IBOutlet public weak var nameLabel: UILabel!
+  @IBOutlet public weak var messageLabel: UILabel!
   
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AntViewerExt
 
 protocol PollControllerDelegate: class {
   func closeButtonPressed()
@@ -116,8 +117,7 @@ extension PollController: UITableViewDelegate, UITableViewDataSource {
     poll?.answeredByUser = true
     isPollStatistic = true
     let name = UserDefaults.standard.string(forKey: "userName") ?? "SuperFan123"
-    poll?.ref?.child("pollAnswers/\(indexPath.row)").child("answeredUsers").childByAutoId().setValue(name, withCompletionBlock: { (error, ref) in
-    })
+    poll?.saveVoteForUsername(name, withAnswer: indexPath.row)
   }
   
 }

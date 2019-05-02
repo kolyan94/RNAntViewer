@@ -8,10 +8,10 @@
 
 import UIKit
 
-class LandscapeMessageCell: UITableViewCell, MessageSupportable {
+public class LandscapeMessageCell: UITableViewCell, MessageSupportable {
   
-  @IBOutlet weak var avatarImageView: UIImageView!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var messageLabel: UILabel!
+  @IBOutlet public weak var avatarImageView: UIImageView!
+  @IBOutlet public weak var nameLabel: UILabel!
+  @IBOutlet public weak var messageLabel: UILabel!
   
 }

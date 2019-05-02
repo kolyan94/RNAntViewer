@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseDatabase
 import IQKeyboardManagerSwift
 import AVKit
+import AntViewerExt
 
 private let maxTextLength = 250
 
@@ -18,7 +17,6 @@ class PlayerController: UIViewController {
   
   private var player :AVPlayer?
   private var playerItem: AVPlayerItem?
-  private var avPlayerLayer: AVPlayerLayer?
   
   @IBOutlet weak var landscapeStreamInfoLeading: NSLayoutConstraint!
   @IBOutlet weak var portraitMessageBottomSpace: NSLayoutConstraint!
@@ -53,7 +51,7 @@ class PlayerController: UIViewController {
   @IBOutlet weak var landscapeStreamInfoStackView: UIStackView!
   @IBOutlet weak var durationView: UIView! {
     didSet {
-      durationView.isHidden = videoContent is Stream
+      durationView.isHidden = videoContent is AntViewerExt.Stream
     }
   }
   
@@ -129,7 +127,7 @@ class PlayerController: UIViewController {
       if let video = videoContent as? Video {
         portraitSeekSlider.isHidden = false
         portraitSeekSlider.maximumValue = Float(video.duration)
-        let image = UIImage(named: "thumb", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        let image = UIImage.image("thumb")
         portraitSeekSlider.setThumbImage(image, for: .normal)
         portraitSeekSlider.addTarget(self, action: #selector(onSliderValChanged(slider:event:)), for: .valueChanged)
       }
@@ -141,7 +139,7 @@ class PlayerController: UIViewController {
       if let video = videoContent as? Video {
         landscapeSeekSlider.isHidden = false
         landscapeSeekSlider.maximumValue = Float(video.duration)
-        let image = UIImage(named: "thumb", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        let image = UIImage.image("thumb")
         landscapeSeekSlider.setThumbImage(image, for: .normal)
         landscapeSeekSlider.addTarget(self, action: #selector(onSliderValChanged(slider:event:)), for: .valueChanged)
       }
@@ -150,7 +148,7 @@ class PlayerController: UIViewController {
   
   @IBOutlet weak var seekLabel: UILabel! {
     didSet {
-      seekLabel.isHidden = videoContent is Stream
+      seekLabel.isHidden = videoContent is AntViewerExt.Stream
     }
   }
   
@@ -161,10 +159,8 @@ class PlayerController: UIViewController {
           seekTo = nil
         }
         adjustHeightForTextView(landscapeTextView)
-        avPlayerLayer?.frame = videoContainerView.bounds
         if OrientationUtility.isLandscape {
-          let window = UIApplication.shared.keyWindow!
-          let leftInset = window.safeAreaInsets.left
+          let leftInset = view.safeAreaInsets.left
           if leftInset > 0 {
             landscapeStreamInfoLeading.constant = OrientationUtility.currentOrientatin == .landscapeLeft ? 18 : 30 + 10
             view.layoutIfNeeded()
@@ -266,38 +262,6 @@ class PlayerController: UIViewController {
     }
   }
   
-  private var chatRef: DatabaseReference? {
-    //TODO: Remove observers
-    didSet {
-      let ref = chatRef?.child("messages")
-      ref?.observe(.childAdded) { [weak self] (snapshot) in
-        guard let `self` = self else {
-          return
-        }
-        if let message = Message(snapshot: snapshot) {
-          self.insertMessage(message)
-        }
-      }
-      
-      ref?.observe(.childRemoved) { [weak self] (snapshot) in
-        guard let `self` = self else {
-          return
-        }
-        if let message = Message(snapshot: snapshot) {
-          self.removeMessage(message)
-        }
-      }
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-        if self?.messagesDataSource.isEmpty == false {
-          let lastIndexPath = IndexPath(row: self!.messagesDataSource.count - 1, section: 0)
-          if lastIndexPath.row >= 0 {
-            self?.currentTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: false)
-          }
-        }
-      }
-    }
-  }
-  
   var videoContent: VideoContent!
   
   fileprivate var messagesDataSource = [Message]()
@@ -320,6 +284,40 @@ class PlayerController: UIViewController {
     
   }
   
+  fileprivate var seekTo: Int? {
+    didSet {
+      if seekTo == nil, let time = oldValue {
+        player?.seek(to: CMTime(seconds: Double(time), preferredTimescale: 1))
+        if let filteredMessages = videoEmuMessages?.filter({$0.timestamp < time}) {
+          messagesDataSource = filteredMessages
+        }
+        portraitTableView.reloadData()
+        landscapeTableView.reloadData()
+        if messagesDataSource.count > 0 {
+          currentTableView.scrollToRow(at: IndexPath(row: messagesDataSource.count - 1, section: 0), at: .bottom, animated: true)
+        }
+        
+        controlsDebouncer.call { [weak self] in
+          if self?.player?.isPlaying == true {
+            if OrientationUtility.isLandscape && self?.seekTo != nil {
+              return
+            }
+            self?.videoControlsView.isHidden = true
+          }
+        }
+      }
+    }
+  }
+  
+  override var preferredStatusBarStyle : UIStatusBarStyle {
+    return .lightContent
+  }
+  
+  override var prefersStatusBarHidden: Bool {
+    let bottomInset = view.safeAreaInsets.bottom
+    return bottomInset == 0
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     OrientationUtility.rotateToOrientation(OrientationUtility.isPortrait ? .portrait : .landscapeRight)
@@ -340,7 +338,7 @@ class PlayerController: UIViewController {
     }
     
     isChatEnabled = false
-    setupFirebaseObservers()
+    setupStreamObservers()
     
     var token: NSObjectProtocol?
     token = NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { [weak self] (notification) in
@@ -379,11 +377,6 @@ class PlayerController: UIViewController {
     UIApplication.shared.isIdleTimerDisabled = true
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    avPlayerLayer?.frame = videoContainerView.bounds
-  }
-  
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     
@@ -418,22 +411,6 @@ class PlayerController: UIViewController {
     }
   }
   
-  override var preferredStatusBarStyle : UIStatusBarStyle {
-    return .lightContent
-  }
-  
-  override var prefersStatusBarHidden: Bool {
-    let window = UIApplication.shared.keyWindow!
-    let bottomInset = window.safeAreaInsets.bottom
-    return bottomInset == 0
-  }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    guard OrientationUtility.isLandscape else {return}
-    avPlayerLayer?.frame = videoContainerView.bounds
-  }
-  
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     if (keyPath == #keyPath(UIView.bounds)) {
       if let tableViewContainerBounds = landscapeTableView.superview?.bounds {
@@ -446,7 +423,6 @@ class PlayerController: UIViewController {
       let playerObject = object as? AVPlayerItem,
       playerObject == currentPlayer.currentItem,
       keyPath == #keyPath(AVPlayerItem.status) {
-      avPlayerLayer?.frame = videoContainerView.bounds
       if currentPlayer.currentItem?.status == .readyToPlay {
         if !isControlsEnabled {
           currentPlayer.play()
@@ -459,41 +435,34 @@ class PlayerController: UIViewController {
     super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
   }
   
-  private func setupFirebaseObservers() {
-    let app = FirebaseApp.app(name: "AntViewerFirebase")!
-    let ref = Database.database(app: app).reference(withPath: "chats").queryOrdered(byChild: "streamId").queryEqual(toValue: videoContent.id)
-    ref.observe(.value) { [weak self] (snapshot) in
-      //TODO: remove observer
-      guard let `self` = self else {
-        return
-      }
-      if let chatSnapshot = snapshot.children.reversed().first as? DataSnapshot {
-        if self.chatRef == nil {
-          self.chatRef = chatSnapshot.ref
+  private func setupStreamObservers() {
+    
+    guard let stream = videoContent as? AntViewerExt.Stream else {return}
+    
+    stream.observeChat { [weak self] (event) in
+      switch event {
+      case .created:
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+          if self?.messagesDataSource.isEmpty == false {
+            let lastIndexPath = IndexPath(row: self!.messagesDataSource.count - 1, section: 0)
+            if lastIndexPath.row >= 0 {
+              self?.currentTableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: false)
+            }
+          }
         }
-        if let value = chatSnapshot.value as? [String: AnyObject] {
-          self.isChatEnabled = value["isActive"]?.boolValue == true
-        }
+      case .stateChanged(isActive: let isActive):
+        self?.isChatEnabled = isActive
+      case .added(message: let message):
+        self?.insertMessage(message)
+      case .removed(message: let message):
+        self?.removeMessage(message)
       }
-      
     }
     
-    let pollsRef = Database.database(app: app).reference(withPath: "polls").queryOrdered(byChild: "streamId").queryEqual(toValue: videoContent.id)
-    pollsRef.observe(.value) { [weak self] (snapshot) in
-      guard let `self` = self else {
-        //        pollsRef.removeAllObservers()
-        return
-      }
-      if let pollSnapshot = snapshot.children.reversed().first as? DataSnapshot,
-        let poll = Poll(snapshot: pollSnapshot) {
-        print(poll)
-        if poll.isActive {
-          self.activePoll = poll
-        } else {
-          self.activePoll = nil
-        }
-      }
+    stream.observePoll { [weak self] (poll) in
+      self?.activePoll = poll
     }
+  
   }
   
   private func startPlayer(){
@@ -502,17 +471,15 @@ class PlayerController: UIViewController {
     player?.allowsExternalPlayback = true
     player?.rate = 1.0
     //TODO: AirPlay
-    avPlayerLayer = AVPlayerLayer.init(player: player)
-    avPlayerLayer?.videoGravity = .resizeAspect
+
     let castedLayer = videoContainerView.layer as! AVPlayerLayer
     castedLayer.player = player
-   // videoContainerView.layer.insertSublayer(avPlayerLayer!, at: 0)
     player?.currentItem?.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
     
     playerTimeObserver = player?.addPeriodicTimeObserver(forInterval: CMTimeMake(value: 1, timescale: 1), queue: .main, using: { [weak self] (time) in
       guard self?.player?.currentItem?.status == .readyToPlay,
         let isPlaybackBufferFull = self?.player?.currentItem?.isPlaybackBufferFull,
-        let isPlaybackLikelyToKeepUp = self?.player?.currentItem?.isPlaybackLikelyToKeepUp else  { return }
+        let isPlaybackLikelyToKeepUp = self?.player?.currentItem?.isPlaybackLikelyToKeepUp else { return }
       if isPlaybackBufferFull || isPlaybackLikelyToKeepUp {
         self?.videoContainerView.removeActivityIndicator()
       } else {
@@ -536,34 +503,7 @@ class PlayerController: UIViewController {
     if videoContent is Video {
       NotificationCenter.default.addObserver(self, selector: #selector(onVideoEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
     }
-    avPlayerLayer?.frame = videoContainerView.bounds
     videoContainerView.showActivityIndicator()
-  }
-  
-  
-  var seekTo: Int? {
-    didSet {
-      if seekTo == nil, let time = oldValue {
-        player?.seek(to: CMTime(seconds: Double(time), preferredTimescale: 1))
-        if let filteredMessages = videoEmuMessages?.filter({$0.timestamp < time}) {
-          messagesDataSource = filteredMessages
-        }
-        portraitTableView.reloadData()
-        landscapeTableView.reloadData()
-        if messagesDataSource.count > 0 {
-          currentTableView.scrollToRow(at: IndexPath(row: messagesDataSource.count - 1, section: 0), at: .bottom, animated: true)
-        }
-        
-        controlsDebouncer.call { [weak self] in
-          if self?.player?.isPlaying == true {
-            if OrientationUtility.isLandscape && self?.seekTo != nil {
-              return
-            }
-            self?.videoControlsView.isHidden = true
-          }
-        }
-      }
-    }
   }
   
   @objc
@@ -583,7 +523,7 @@ class PlayerController: UIViewController {
   @objc
   private func onVideoEnd() {
     videoControlsView.isHidden = false
-    playButton.setImage(UIImage(named: "play", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+    playButton.setImage(UIImage.image("play"), for: .normal)
     player?.seek(to: .zero)
   }
   
@@ -666,11 +606,11 @@ class PlayerController: UIViewController {
   @IBAction func playButtonPressed(_ sender: UIButton) {
     if player?.isPlaying == true {
       player?.pause()
-      playButton.setImage(UIImage(named: "play", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+      playButton.setImage(UIImage.image("play"), for: .normal)
       controlsDebouncer.call {}
     } else {
       player?.play()
-      playButton.setImage(UIImage(named: "pause", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
+      playButton.setImage(UIImage.image("pause"), for: .normal)
       controlsDebouncer.call { [weak self] in
         self?.videoControlsView.isHidden = true
       }
@@ -684,11 +624,11 @@ class PlayerController: UIViewController {
       textView?.text.removeAll()
       return
     }
-    
+    guard let stream = videoContent as? AntViewerExt.Stream else {return}
     sender.isEnabled = false
     let name = UserDefaults.standard.string(forKey: "userName") ?? "SuperFan123"
     let message = Message(email: name, text: text)
-    chatRef?.child("messages").childByAutoId().setValue(message.toAnyObject(), withCompletionBlock: { (error, ref) in
+    stream.send(message: message) { (error) in
       if error == nil {
         self.adjustHeightForTextView(self.landscapeTextView)
         self.adjustHeightForTextView(self.portraitTextView)
@@ -701,7 +641,7 @@ class PlayerController: UIViewController {
       }
       textView?.text = ""
       sender.isEnabled = true
-    })
+    }
   }
   
   fileprivate func adjustHeightForTextView(_ textView: UITextView) {
@@ -726,9 +666,7 @@ class PlayerController: UIViewController {
     switch sender.direction {
     case .right:
       landscapeChatLeading.constant = landscapeStreamInfoStackView.frame.origin.x
-      //FIXME: refactor
-      let window = UIApplication.shared.keyWindow!
-      let isLeftInset = window.safeAreaInsets.left > 0
+      let isLeftInset = view.safeAreaInsets.left > 0
       chatFieldLeading = isKeyboardShown ? OrientationUtility.currentOrientatin == .landscapeRight && isLeftInset ? 30 : 0 : landscapeStreamInfoStackView.frame.origin.x
     case .left:
       landscapeChatLeading.constant = -view.bounds.width
@@ -799,15 +737,14 @@ extension PlayerController {
       let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
       let rawAnimationCurve = (notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).uint32Value << 16
       let animationCurve = UIView.AnimationOptions.init(rawValue: UInt(rawAnimationCurve))
-      let window = UIApplication.shared.keyWindow!
-      let bottomPadding = window.safeAreaInsets.bottom
+      let bottomPadding = view.safeAreaInsets.bottom
       self.isKeyboardShown = true
       portraitMessageBottomSpace.constant = keyboardSize.height - bottomPadding
       landscapeMessageBottomSpace.constant = keyboardSize.height - bottomPadding
       landscapeMessageWidth.priority = UILayoutPriority(rawValue: 100)
       landscapeMessageTrailing.priority = UILayoutPriority(rawValue: 999)
       if OrientationUtility.isLandscape {
-        let isLeftInset = window.safeAreaInsets.left > 0
+        let isLeftInset = view.safeAreaInsets.left > 0
         chatFieldLeading = OrientationUtility.currentOrientatin == .landscapeRight && isLeftInset ? 30 : 0
       }
       

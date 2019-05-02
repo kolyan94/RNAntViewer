@@ -97,13 +97,10 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Assets/GoogleService-Kek.plist"
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Assets/loader.json"
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Assets/Images.xcassets"
+  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/AntWidget.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Controllers/PlayerController.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Controllers/PollController.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Controllers/StreamListController.xib"
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/AntWidget.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/EmptyView.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/HeaderView.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/LandscapeMessageCell.xib"
@@ -112,16 +109,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/PollStatisticCell.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/PortraitMessageCell.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/StreamViewCell.xib"
-  install_resource "${PODS_ROOT}/IQKeyboardManagerSwift/IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/AntViewer_ios/AntWidget.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Assets/GoogleService-Kek.plist"
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Assets/loader.json"
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Assets/Images.xcassets"
+  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/AntWidget.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Controllers/PlayerController.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Controllers/PollController.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Controllers/StreamListController.xib"
-  install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/AntWidget.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/EmptyView.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/HeaderView.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/LandscapeMessageCell.xib"
@@ -130,7 +124,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/PollStatisticCell.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/PortraitMessageCell.xib"
   install_resource "${PODS_ROOT}/AntViewer_ios/AntViewer_ios/Classes/Views/StreamViewCell.xib"
-  install_resource "${PODS_ROOT}/IQKeyboardManagerSwift/IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/AntViewer_ios/AntWidget.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

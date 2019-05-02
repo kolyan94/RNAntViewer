@@ -8,13 +8,13 @@
 
 import UIKit
 
-class StreamViewCell: UICollectionViewCell {
+public class StreamViewCell: UICollectionViewCell {
   
-  @IBOutlet weak var liveView: UIView!
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var subtitleLabel: UILabel!
-  @IBOutlet weak var viewersCountLabel: UILabel!
-  @IBOutlet weak var timeLabel: UILabel!
-  @IBOutlet weak var contentImageView: UIImageView!
+  @IBOutlet public weak var liveView: UIView!
+  @IBOutlet public weak var titleLabel: UILabel!
+  @IBOutlet public weak var subtitleLabel: UILabel!
+  @IBOutlet public weak var viewersCountLabel: UILabel!
+  @IBOutlet public weak var timeLabel: UILabel!
+  @IBOutlet public weak var contentImageView: UIImageView!
   
 }
