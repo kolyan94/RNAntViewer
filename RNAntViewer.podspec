@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNAntViewer"
-  s.version      = "1.0.5"
+  s.version      = "1.0.6"
   s.summary      = "RNAntViewer"
   s.description  = <<-DESC
                   RNAntViewer bla bla
