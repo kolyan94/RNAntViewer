@@ -53,7 +53,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNAntViewer (1.0.3):
+  - RNAntViewer (1.0.4):
     - AntViewer_ios
     - React
   - yoga (0.59.6.React)
@@ -68,7 +68,7 @@ DEPENDENCIES:
   - React/RCTNetwork (from `../node_modules/react-native`)
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
-  - RNAntViewer (from `../node_modules/react-native-ant-viewer`)
+  - RNAntViewer (from `../../`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -89,7 +89,7 @@ EXTERNAL SOURCES:
   React:
     :path: "../node_modules/react-native"
   RNAntViewer:
-    :path: "../node_modules/react-native-ant-viewer"
+    :path: "../../"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -103,9 +103,9 @@ SPEC CHECKSUMS:
   Kingfisher: 9c8f2cc6710334e06f32ba2b45e77707d5e2f0c9
   lottie-ios: 55a2de40418f8de2b155efaba4d4d1a025a5c570
   React: 0bb58efca577aa4b3c8f03a9fbf0d9a8ebdb5ac4
-  RNAntViewer: 63fc245e541fb04dad3cbd923d63c4a3ad76428d
+  RNAntViewer: 1aab7522e440266b7736befc35236ccea251615c
   yoga: 8dacc3c5977cb8e07c346e203bb5f4ffe01296df
 
-PODFILE CHECKSUM: c170b13c3502d2c75efa5064a8efcef30da29629
+PODFILE CHECKSUM: f28d83481b4735899534f36fa7a003ddcdb1251c
 
 COCOAPODS: 1.7.0.beta.3

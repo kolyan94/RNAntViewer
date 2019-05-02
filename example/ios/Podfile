@@ -19,6 +19,7 @@ target 'example' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'RNAntViewer', path: '../node_modules/react-native-ant-viewer'
+#  pod 'RNAntViewer', path: '../node_modules/react-native-ant-viewer'
+  pod 'RNAntViewer', path: '../../'
 
 end

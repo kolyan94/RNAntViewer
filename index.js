@@ -1,6 +1,6 @@
 
-import { NativeModules } from 'react-native';
+import { requireNativeComponent } from 'react-native';
 
-const { RNAntViewer } = NativeModules;
+const AntWidget = requireNativeComponent('AntWidget', null);
 
-export default RNAntViewer;
+export default AntWidget;

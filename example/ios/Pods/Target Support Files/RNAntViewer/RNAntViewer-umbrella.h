@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "RNAntViewer-Bridging-Header.h"
 #import "RNAntViewer.h"
 
 FOUNDATION_EXPORT double RNAntViewerVersionNumber;

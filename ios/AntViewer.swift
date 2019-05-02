@@ -6,4 +6,13 @@
 //  Copyright © 2019 Facebook. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import AntViewer_ios
+
+@objc(AntViewer)
+class AntViewer : RCTViewManager {
+  override func view() -> UIView! {
+    return AntWidget();
+  }
+}
+
