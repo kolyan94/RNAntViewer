@@ -9,8 +9,8 @@
 import UIKit
 import AntViewer_ios
 
-@objc(AntViewer)
-class AntViewer : RCTViewManager {
+@objc(AntViewerManager)
+class AntViewerManager : RCTViewManager {
   override func view() -> UIView! {
     return AntWidget();
   }

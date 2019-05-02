@@ -11,7 +11,7 @@
 #endif
 
 #import "RNAntViewer-Bridging-Header.h"
-#import "RNAntViewer.h"
+#import "RNAntViewerModule.h"
 
 FOUNDATION_EXPORT double RNAntViewerVersionNumber;
 FOUNDATION_EXPORT const unsigned char RNAntViewerVersionString[];

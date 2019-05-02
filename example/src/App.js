@@ -5,7 +5,7 @@
  * @format
  * @flow
  */
-import {AntWidget} from 'react-native-ant-viewer';
+import AntWidget from 'react-native-ant-viewer';
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 

@@ -5,7 +5,7 @@
 #import <React/RCTViewManager.h>
 #endif
 
-@interface RNAntViewer : RCTViewManager
+@interface RNAntViewerModule : RCTViewManager
 
 @end
   
