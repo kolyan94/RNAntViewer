@@ -5,7 +5,7 @@
  * @format
  * @flow
  */
-import RNAntViewerSdk from 'react-native-ant-viewer-sdk'
+import {AntWidget} from 'react-native-ant-viewer';
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
@@ -18,23 +18,13 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-
-  onPress = () => {
-    RNAntViewerSdk.addEvent('Birthday Party', '4 Privet Drive, Surrey');
-
-}
   render() {
     return (
       <View style={styles.container}>
+        <AntWidget />
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
-        <TouchableOpacity
-       style={styles.button}
-       onPress={this.onPress}
-     >
-       <Text> Touch Here </Text>
-     </TouchableOpacity>
       </View>
     );
   }
@@ -52,11 +42,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  button: {
-  alignItems: 'center',
-  backgroundColor: '#DDDDDD',
-  padding: 10
-},
   instructions: {
     textAlign: 'center',
     color: '#333333',
