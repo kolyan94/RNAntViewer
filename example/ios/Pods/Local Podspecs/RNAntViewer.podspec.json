@@ -1,6 +1,6 @@
 {
   "name": "RNAntViewer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "summary": "RNAntViewer",
   "description": "RNAntViewer bla bla",
   "homepage": "https://github.com/kolyan94/RNAntViewer",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/kolyan94/RNAntViewer.git",
-    "tag": "1.0.5"
+    "tag": "1.0.6"
   },
   "source_files": "ios/**/*.{h,m,swift}",
   "requires_arc": true,
