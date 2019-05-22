@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNAntViewer"
-  s.version      = "1.0.6"
+  s.version      = "1.1.0"
   s.summary      = "RNAntViewer"
   s.description  = <<-DESC
                   RNAntViewer bla bla
@@ -12,11 +12,11 @@ Pod::Spec.new do |s|
   s.author       = { "author" => "author@domain.cn" }
   s.platform     = :ios, "11.3"
   s.source       = { :git => "https://github.com/kolyan94/RNAntViewer.git", :tag => s.version.to_s }
-  s.source_files  = "ios/**/*.{h,m,swift}"
+  s.source_files  = "ios/**/*.{h,m}"
   s.requires_arc = true
-
+  s.pod_target_xcconfig = {'DEFINES_MODULE' => 'YES'}
   s.static_framework = true
-  s.dependency "React"
-  s.dependency "AntViewer_ios"
-  s.swift_version = "4.2"
+  s.dependency 'React'
+  s.dependency 'AntViewer_ios'
+  s.swift_version = "5"
 end

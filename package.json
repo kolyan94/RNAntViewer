@@ -4,7 +4,7 @@
     "url": "https://github.com/kolyan94/RNAntViewer.git"
   },
   "name": "react-native-ant-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
