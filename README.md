@@ -10,7 +10,6 @@
 #### iOS
 
 If you use Cocoapods: 
-1. Be sure you already has `use_frameworks!` on your Podfile.
 1. Add  `pod 'RNAntViewer', path: '../node_modules/react-native-ant-viewer'` to your Podfile
 2. `$ pod install`
 
@@ -57,7 +56,13 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <AntWidget />
+        <AntWidget
+        isLightMode={true}
+        bottomMargin={40}
+        rightMargin={30}
+        onViewerAppear={() => console.log("Appeared")}
+        onViewerDisappear={() => console.log("Disappeared")}
+        />
         <Text style={styles.welcome}>Welcome to React Native!</Text>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>

@@ -418,8 +418,8 @@
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				012472FE22955AD00085DF7F /* File.swift */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				012472FE22955AD00085DF7F /* File.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,

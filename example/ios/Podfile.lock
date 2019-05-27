@@ -1,5 +1,5 @@
 PODS:
-  - AntViewer_ios (0.3.2):
+  - AntViewer_ios (0.3.6):
     - Firebase/Core (~> 5.11)
     - Firebase/Database (~> 5.11)
   - boost-for-react-native (1.63.0)
@@ -108,7 +108,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - RNAntViewer (1.1.0):
+  - RNAntViewer (1.1.1):
     - AntViewer_ios
     - React
   - yoga (0.59.6.React)
@@ -156,7 +156,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AntViewer_ios: 4889fe5fe16ce34a74b0e23f1573b76bbcf7b660
+  AntViewer_ios: f75d4420d89f9018047e92af807687191c9e6f31
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
   Firebase: 0c8cf33f266410c61ab3e2265cfa412200351d9c
@@ -172,9 +172,9 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   React: 0bb58efca577aa4b3c8f03a9fbf0d9a8ebdb5ac4
-  RNAntViewer: 1400b8a7a10649aeb2539a99e7b2be1d94a0825b
+  RNAntViewer: 55a8940d297d9a60a9287a18dc09b1bb41dacae8
   yoga: 8dacc3c5977cb8e07c346e203bb5f4ffe01296df
 
-PODFILE CHECKSUM: 171c6abac19fef9d85c9571c94d4c72493b8e363
+PODFILE CHECKSUM: 245162aea73b645fef55019e53d6e09893c529bf
 
-COCOAPODS: 1.7.0.rc.2
+COCOAPODS: 1.7.0
