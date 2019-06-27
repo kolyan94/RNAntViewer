@@ -72,4 +72,12 @@ export default class App extends Component<Props> {
 }
 
 ```
+
+| Property          | Type     | Description                                                            |
+|-------------------|----------|------------------------------------------------------------------------|
+| isLightMode       | Bool     | There are two widget appearance modes: light & dark. By default false. |
+| bottomMargin      | Number   | Bottom margin. Default: 20.                                            |
+| rightMargin       | Number   | Right margin. Default: 20.                                             |
+| onViewerAppear    | Callback | Called when the user opens the widget controller.                      |
+| onViewerDisappear | Callback | Called when the user dismisses the widget controller.                  |
   
