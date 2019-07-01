@@ -81,3 +81,10 @@ export default class App extends Component<Props> {
 | onViewerAppear    | Callback | Called when the user opens the widget controller.                      |
 | onViewerDisappear | Callback | Called when the user dismisses the widget controller.                  |
   
+  ## Author
+  
+  Mykola Vaniurskyi, mv@leobit.com
+  
+  ## License
+  
+  RNAntViewer is available under the MIT license. See the LICENSE file for more info.
